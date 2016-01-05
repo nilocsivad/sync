@@ -1,0 +1,60 @@
+* {
+	font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #232323;
+	margin: 0;
+	padding: 0
+}
+
+a {
+	color: #2e68e0
+}
+
+a:link, a:visited {
+	text-decoration: none
+}
+
+a:active, a:hover {
+	color: #bb4242;
+	text-decoration: underline
+}
+
+h1 {
+	font-size: 22px
+}
+
+h2 {
+	font-size: 20px
+}
+
+h3 {
+	font-size: 18px
+}
+
+h4 {
+	font-size: 16px
+}
+
+h5 {
+	font-size: 14px
+}
+
+h6 {
+	font-size: 12px
+}
+
+img {
+	border: none
+}
+
+input {
+	cursor: pointer
+}
+
+input[type=text], input[type=password] {
+	cursor: default
+}
+
+li, ol, ul {
+	list-style: none
+}
