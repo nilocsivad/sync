@@ -21,7 +21,7 @@
 		BufferedInputStream input = new BufferedInputStream( new FileInputStream( file ) );
 		BufferedOutputStream output = new BufferedOutputStream( response.getOutputStream() );
 		
-		byte[] buf = new byte[ 1024 * 10 ];
+		byte[] buf = new byte[ 1024 * 1024 * 36 ];
 		int len = 0;
 		while ( ( len = input.read( buf ) ) > 0 ) {
 			output.write( buf, 0, len );
