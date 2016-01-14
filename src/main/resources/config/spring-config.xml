@@ -16,7 +16,7 @@
 
 	<!-- 配置工具 -->
 	<bean class="com.iam_vip.sync.rs.u.ConfigUtil" scope="singleton">
-		<constructor-arg name="folder" type="java.lang.String" value="E:\tmp\" />
+		<constructor-arg name="folder" type="java.lang.String" value="/tmp" />
 	</bean>
 
 	<!-- 过滤URL及对应Method -->
