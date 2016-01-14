@@ -148,6 +148,8 @@
 		if ( browser.versions.mobile || browser.versions.android || browser.versions.ios ) {
 			var h = $( ".footer" ).height();
 			$( "#emp-p" ).height( h / 2 );
+
+			$( ".full-w-dom" ).find( "p" ).find( "a" ).css( "font-size", "22px" );
 		}
 	}, 10 );
 </script>
