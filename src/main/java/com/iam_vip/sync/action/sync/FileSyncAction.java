@@ -41,7 +41,23 @@ public class FileSyncAction extends ActionBase {
 			
 			BufferedInputStream input = new BufferedInputStream( f.getInputStream() );
 			
-			File newFile = new File( ConfigUtil.getFolder(), f.getOriginalFilename() );
+			String folder = ConfigUtil.getFolder();
+			if ( !folder.contains( ":" ) ) {
+				
+				File fj = new File( "." );
+				File[] roots = File.listRoots();
+				for ( File root : roots ) {
+					if ( fj.getAbsolutePath().startsWith( root.getAbsolutePath() ) ) {
+						folder = root.getAbsolutePath() + folder;
+						break;
+					}
+				}
+				
+				File ff = new File( folder );
+				if ( !ff.exists() ) ff.mkdirs();
+			}
+			
+			File newFile = new File( folder, f.getOriginalFilename() );
 			BufferedOutputStream output = new BufferedOutputStream( new FileOutputStream( newFile ) );
 			
 			byte[] buf = new byte[ 1024 * 10 ];
