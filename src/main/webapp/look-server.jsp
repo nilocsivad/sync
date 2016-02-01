@@ -1,7 +1,8 @@
-<%@page import="java.util.Arrays"%>
-<%@page import="java.net.URLEncoder"%>
-<%@page import="java.io.File"%>
+<%@page import="com.iam_vip.sync.rs.FileComparator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Arrays"%>
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.io.File"%>
 <%@ include file="/url.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -19,6 +20,12 @@
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.global.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.frame.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/look-server.css" />
+<style type="text/css">
+.link-p a {
+	display: block;
+	width: 100%;
+}
+</style>
 </head>
 <body class="home-body">
 
@@ -68,6 +75,7 @@
 				if (f.isDirectory()) {
 
 					File[] tmp = f.listFiles();
+					Arrays.sort(tmp, new FileComparator());
 
 					if (!f.getAbsolutePath().endsWith(":\\")) {
 
@@ -87,16 +95,16 @@
 				<%
 					for (File file : fs) {
 				%>
-				<p style="margin: 6px 0">
+				<p class="link-p" style="margin: 10px 0">
 					<%
 						if (file.isDirectory()) {
 					%>
 
-					<a href="${URL }/look-server.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getAbsolutePath()%></a>
+					<a href="${URL }/look-server.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
 					<%
 						} else {
 					%>
-					<a href="${URL }/download.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getAbsolutePath()%></a>
+					<a href="${URL }/download.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
 					<%
 						}
 					%>
