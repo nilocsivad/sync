@@ -54,6 +54,7 @@ public class FileSyncAction extends ActionBase {
 
 				File newFile = new File(folder, f.getOriginalFilename());
 				System.out.println("==> " + newFile.getAbsolutePath());
+				
 				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(newFile));
 
 				byte[] buf = new byte[1024 * 10];
