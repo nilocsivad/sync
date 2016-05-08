@@ -16,7 +16,12 @@
 
 	<!-- 配置工具 -->
 	<bean class="com.iam_vip.sync.rs.u.ConfigUtil" scope="singleton">
-		<constructor-arg name="folder" type="java.lang.String" value="/tmp" />
+		<constructor-arg name="fmap" type="java.util.Map">
+			<map key-type="java.lang.String" value-type="java.lang.String">
+				<entry key="Windows" value="D:/tmp" />
+				<entry key="Others" value="/tmp" />
+			</map>
+		</constructor-arg>
 	</bean>
 
 	<!-- 过滤URL及对应Method -->
