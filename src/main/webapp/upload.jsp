@@ -71,6 +71,21 @@
 						<label>选择文件:</label>
 						<input type="file" name="f" />
 					</p>
+					<p>&nbsp;</p>
+					<p>
+						<label>选择文件:</label>
+						<input type="file" name="f" />
+					</p>
+					<p>&nbsp;</p>
+					<p>
+						<label>选择文件:</label>
+						<input type="file" name="f" />
+					</p>
+					<p>&nbsp;</p>
+					<p>
+						<label>选择文件:</label>
+						<input type="file" name="f" />
+					</p>
 				</form>
 
 				<p>&nbsp;</p>
