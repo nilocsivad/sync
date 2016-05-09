@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>RFID Server</title>
+<title>File Uploader</title>
 
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.global.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.frame.css" />
@@ -22,7 +22,7 @@
 
 	<div class="header">
 		<h1 class="logo-text">
-			<a href="${URL }/">RFID Server</a>
+			<a href="${URL }/">File Uploader</a>
 		</h1>
 	</div>
 

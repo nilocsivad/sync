@@ -15,7 +15,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Client &amp; Server File Transfer</title>
+<title>File Looker</title>
 
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.global.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.frame.css" />
@@ -32,7 +32,7 @@
 
 	<div class="header">
 		<h1 class="logo-text">
-			<a href="${URL }/">Client &amp; Server File Transfer</a>
+			<a href="${URL }/">File Looker</a>
 		</h1>
 	</div>
 
