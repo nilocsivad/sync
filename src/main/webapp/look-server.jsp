@@ -104,7 +104,7 @@
 					<%
 						} else {
 					%>
-					<a href="${URL }/download.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
+					<a href="${URL }/file-sync/download.html?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
 					<%
 						}
 					%>

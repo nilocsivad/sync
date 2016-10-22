@@ -46,7 +46,7 @@
 
 				<p>&nbsp;</p>
 
-				<form id="upload-form" action="${URL }/file-sync/upload" method="post" enctype="multipart/form-data">
+				<form id="upload-form" action="${URL }/file-sync/upload.html" method="post" enctype="multipart/form-data">
 					<p>
 						<label>选择文件:</label>
 						<input type="file" name="f" />
