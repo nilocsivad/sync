@@ -116,7 +116,6 @@ public class FileSyncAction extends ActionBase {
 		File file = new File(path);
 
 		response.reset();
-		response.sendRedirect("");
 		response.setContentType("application/x-download");
 		response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
 		response.addHeader("Content-Length", file.length() + "");
