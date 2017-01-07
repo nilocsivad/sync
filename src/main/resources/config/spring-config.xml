@@ -46,6 +46,7 @@
 				<entry key="Z:\\" value="/zzz" />
 			</map>
 		</constructor-arg>
+		<constructor-arg name="linuxMacResource" type="java.lang.String" value="/sync-rs" />
 	</bean>
 	
 	<!-- 
