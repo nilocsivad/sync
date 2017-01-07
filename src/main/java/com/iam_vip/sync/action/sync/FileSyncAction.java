@@ -105,6 +105,18 @@ public class FileSyncAction extends ActionBase {
 			}
 
 		}
+		else if (System.getProperty("os.name").contains("Mac")) {
+
+			int port = request.getServerPort();
+			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
+			String prefix = ConfigUtil.getLinuxMacResource();
+
+			String to = http + prefix + URLEncoder.encode(path, "UTF-8").replace("%2F", "/");
+			System.out.println(to);
+
+			response.sendRedirect(to);
+
+		}
 		else {
 			downloadNext(path, response);
 		}
