@@ -94,10 +94,10 @@ public class FileSyncAction extends ActionBase {
 				String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
 				String prefix = "/" + root + root + root;
 
-				String to = http + prefix + folder;
+				String to = http + prefix.toLowerCase() + URLEncoder.encode(folder, "UTF-8").replace("%2F", "/");
 				System.out.println(to);
 
-				response.sendRedirect(URLEncoder.encode(to, "UTF-8"));
+				response.sendRedirect(to);
 
 			}
 			else {
