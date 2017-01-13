@@ -33,23 +33,42 @@ public class PathUtil {
 				String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
 				String prefix = "/" + root + root + root;
 
-				String to = http + prefix + folder;
+				String to = http + prefix.toLowerCase() + URLEncoder.encode(folder, "UTF-8").replace("%2F", "/");
+				/// System.out.println(to); ///
 
+				/// response.sendRedirect(to); ///
 				return to;
 
 			}
 			else {
+				/// downloadNext(path, response); ///
 				return next(request, path);
 			}
 
 		}
-		return next(request, path);
+//		else if (System.getProperty("os.name").contains("Mac")) {
+//		}
+		else {
+
+			int port = request.getServerPort();
+			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
+			String prefix = ConfigUtil.getLinuxMacResource();
+
+			String to = http + prefix + URLEncoder.encode(path, "UTF-8").replace("%2F", "/");
+			/// System.out.println(to); ///
+
+			/// response.sendRedirect(to); ///
+			return to;
+
+			/// downloadNext(path, response); ///
+			/// return next(request, path);
+		}
 
 	}
 
 	/**
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	private static String next(HttpServletRequest request, String path) throws UnsupportedEncodingException {
 		return request.getContextPath() + "/file-sync/download.html?path=" + URLEncoder.encode(path, request.getCharacterEncoding());
