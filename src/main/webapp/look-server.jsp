@@ -106,7 +106,8 @@
 					<%
 						} else {
 					%>
-					<a href="<%=PathUtil.getPath(request, file.getAbsolutePath())%>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
+					<a class="href-link" href="<%=PathUtil.getPath(request, file.getAbsolutePath())%>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
+					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">Stream</a>
 					<%
 						}
 					%>

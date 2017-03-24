@@ -80,9 +80,11 @@ public class FileSyncAction extends ActionBase {
 	}
 
 	@RequestMapping(value = { "download.html" })
-	public void download(String path, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
+	public void download(String path, @RequestParam(defaultValue = "0") Integer f, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
-		if (System.getProperty("os.name").contains("Windows")) {
+		String osName = System.getProperty("os.name");
+
+		if (osName.contains("Windows") && f == 0) {
 
 			int idx = path.indexOf(":");
 			if (idx == 1) {
@@ -105,7 +107,7 @@ public class FileSyncAction extends ActionBase {
 			}
 
 		}
-		else if (System.getProperty("os.name").contains("Mac")) {
+		else if ((osName.contains("Mac") || osName.contains("Linux")) && f == 0) {
 
 			int port = request.getServerPort();
 			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
