@@ -101,7 +101,7 @@
 						} else {
 					%>
 					<a class="href-link" href="<%=PathUtil.getPath(request, file.getAbsolutePath())%>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
-					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">=_</a>
+					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=" data-path="<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">=_</a>
 					<%
 						}
 					%>
@@ -170,6 +170,11 @@
 							$(".full-w-dom").find("p").find("a").css(
 									"font-size", "22px");
 						}
+						
+						$(".stream-link").each(function(i, _d) {
+							var _path = $(_d).attr("data-path");
+							$(_d).attr("href", $(_d).attr("href") + window.encodeURIComponent(_path));
+						});
 					}, 10);
 </script>
 </html>

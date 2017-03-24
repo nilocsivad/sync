@@ -3,9 +3,15 @@
  */
 package com.iam_vip.sync.rs.u;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,7 +25,25 @@ public class PathUtil {
 	public PathUtil() {
 	}
 
+	private static Invocable invocable;
+
 	public static String getPath(HttpServletRequest request, String path) throws Exception {
+		
+		if (invocable == null) {
+			
+			String realPath = request.getServletContext().getRealPath("encodeURIComponent.js");
+			System.out.println(realPath);
+			
+			try {
+				ScriptEngineManager m = new ScriptEngineManager();
+				ScriptEngine e = m.getEngineByName("JavaScript");
+				e.eval(new FileReader(realPath));
+				invocable = (Invocable) e;
+			}
+			catch (FileNotFoundException | ScriptException e) {
+				e.printStackTrace();
+			}
+		}
 
 		if (System.getProperty("os.name").contains("Windows")) {
 
@@ -33,7 +57,7 @@ public class PathUtil {
 				String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
 				String prefix = "/" + root + root + root;
 
-				String to = http + prefix.toLowerCase() + URLEncoder.encode(folder, "UTF-8").replace("%2F", "/");
+				String to = http + prefix.toLowerCase() + invocable.invokeFunction("enc", folder).toString().replace("%2F", "/");
 				/// System.out.println(to); ///
 
 				/// response.sendRedirect(to); ///
@@ -46,15 +70,15 @@ public class PathUtil {
 			}
 
 		}
-//		else if (System.getProperty("os.name").contains("Mac")) {
-//		}
+		// else if (System.getProperty("os.name").contains("Mac")) {
+		// }
 		else {
 
 			int port = request.getServerPort();
 			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
 			String prefix = ConfigUtil.getLinuxMacResource();
 
-			String to = http + prefix + URLEncoder.encode(path, "UTF-8").replace("%2F", "/");
+			String to = http + prefix + invocable.invokeFunction("enc", path).toString().replace("%2F", "/");
 			/// System.out.println(to); ///
 
 			/// response.sendRedirect(to); ///
