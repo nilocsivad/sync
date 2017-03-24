@@ -23,3 +23,11 @@
 	border: 1px solid #222222;
 	outline: 0;
 }
+
+.href-link:before {
+	content: '['
+}
+
+.href-link:after {
+	content: ']'
+}

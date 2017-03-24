@@ -21,12 +21,6 @@
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.global.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/sync.frame.css" />
 <link type="text/css" rel="stylesheet" href="${URL }/static_r/style/look-server.css" />
-<style type="text/css">
-.link-p a {
-	display: block;
-	width: 100%;
-}
-</style>
 </head>
 <body class="home-body">
 
@@ -107,7 +101,7 @@
 						} else {
 					%>
 					<a class="href-link" href="<%=PathUtil.getPath(request, file.getAbsolutePath())%>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
-					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">Stream</a>
+					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">=_</a>
 					<%
 						}
 					%>
