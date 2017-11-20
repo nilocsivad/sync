@@ -36,7 +36,10 @@
 				<p>&nbsp;</p>
 
 				<p>
+					<%String pxdo = request.getParameter("xdo"); %>
+					<%if (pxdo != null && pxdo.equals("1")) { %>
 					<a class="link-btn" href="${URL }/upload.jsp">上传</a> <a class="link-btn" href="${URL }/look-server.jsp">浏览</a>
+					<%} %>
 				</p>
 
 				<p>&nbsp;</p>

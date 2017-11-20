@@ -96,12 +96,13 @@
 						if (file.isDirectory()) {
 					%>
 
-					<a href="${URL }/look-server.jsp?path=<%=URLEncoder.encode( file.getAbsolutePath(  ), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
+					<a href="${URL }/look-server.jsp?path=<%=URLEncoder.encode(file.getAbsolutePath(), "UTF-8" ) %>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
 					<%
 						} else {
 					%>
 					<a class="href-link" href="<%=PathUtil.getPath(request, file.getAbsolutePath())%>" title="<%=file.getAbsolutePath()%>"><%=file.getName()%></a>
-					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=" data-path="<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">=_</a>
+					<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<a class="stream-link" href="${URL }/file-sync/download.html?f=1&path=" data-path="<%=file.getAbsolutePath()%>" title="<%=file.getAbsolutePath()%>">&gt;&gt;&gt;&gt;</a>
 					<%
 						}
 					%>
@@ -132,49 +133,41 @@
 	}
 </script>
 <script type="text/javascript">
-	window
-			.setTimeout(
-					function() {
-						//判断访问终端
-						var browser = {
-							versions : function() {
-								var u = navigator.userAgent, app = navigator.appVersion;
-								return {
-									trident : u.indexOf('Trident') > -1, //IE内核
-									presto : u.indexOf('Presto') > -1, //opera内核
-									webKit : u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-									gecko : u.indexOf('Gecko') > -1
-											&& u.indexOf('KHTML') == -1,//火狐内核
-									mobile : !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-									ios : !!u
-											.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-									android : u.indexOf('Android') > -1
-											|| u.indexOf('Adr') > -1, //android终端
-									iPhone : u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-									iPad : u.indexOf('iPad') > -1, //是否iPad
-									webApp : u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
-									weixin : u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
-									qq : u.match(/\sQQ/i) == " qq" //是否QQ
-								};
-							}(),
-							language : (navigator.browserLanguage || navigator.language)
-									.toLowerCase()
-						};
+	window.setTimeout(function() {
+		//判断访问终端
+		var browser = {
+			versions : function() {
+				var u = navigator.userAgent, app = navigator.appVersion;
+				return {
+					trident : u.indexOf('Trident') > -1, //IE内核
+					presto : u.indexOf('Presto') > -1, //opera内核
+					webKit : u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+					gecko : u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+					mobile : !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+					ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+					android : u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+					iPhone : u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+					iPad : u.indexOf('iPad') > -1, //是否iPad
+					webApp : u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+					weixin : u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+					qq : u.match(/\sQQ/i) == " qq" //是否QQ
+				};
+			}(),
+			language : (navigator.browserLanguage || navigator.language).toLowerCase()
+		};
 
-						//判断是否移动端
-						if (browser.versions.mobile || browser.versions.android
-								|| browser.versions.ios) {
-							var h = $(".footer").height();
-							$("#emp-p").height(h / 2);
+		//判断是否移动端
+		if (browser.versions.mobile || browser.versions.android || browser.versions.ios) {
+			var h = $(".footer").height();
+			$("#emp-p").height(h / 2);
 
-							$(".full-w-dom").find("p").find("a").css(
-									"font-size", "22px");
-						}
-						
-						$(".stream-link").each(function(i, _d) {
-							var _path = $(_d).attr("data-path");
-							$(_d).attr("href", $(_d).attr("href") + window.encodeURIComponent(_path));
-						});
-					}, 10);
+			$(".full-w-dom").find("p").find("a").css("font-size", "22px");
+		}
+
+		$(".stream-link").each(function(i, _d) {
+			var _path = $(_d).attr("data-path");
+			$(_d).attr("href", $(_d).attr("href") + window.encodeURIComponent(_path));
+		});
+	}, 10);
 </script>
 </html>
