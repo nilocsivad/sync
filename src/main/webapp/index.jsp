@@ -35,12 +35,31 @@
 
 				<p>&nbsp;</p>
 
+				<%String pxdo = request.getParameter("xdo"); %>
+				<%if (pxdo != null && pxdo.equals("1")) { %>
 				<p>
-					<%String pxdo = request.getParameter("xdo"); %>
-					<%if (pxdo != null && pxdo.equals("1")) { %>
-					<a class="link-btn" href="${URL }/upload.jsp">上传</a> <a class="link-btn" href="${URL }/look-server.jsp">浏览</a>
-					<%} %>
+					<a class="link-btn" href="${URL }/upload.jsp">上传</a> 
+					<a class="link-btn" href="${URL }/look-server.jsp">浏览</a>
 				</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<pre >
+					Windows 系统中,需要在 Tomcat 的 conf/server.xml 文件中, sync 对应的 Context 行下
+					加入 Context 标签, docBase 是盘符根目录, path 对应盘符三个连续小写字母即可.
+					
+					&lt;Context docBase="sync" path="/sync" reloadable="false" /&gt;
+					&lt;Context docBase="C:\" path="/ccc" reloadable="true"/&gt;
+					&lt;Context docBase="D:\" path="/ddd" reloadable="true"/&gt;
+					&lt;Context docBase="E:\" path="/eee" reloadable="true"/&gt;
+					
+					非 Windows 系统中, 添加如下内容
+					
+					&lt;Context docBase="sync" path="/sync" reloadable="false" /&gt;
+					&lt;Context docBase="/" path="/sync-rs" reloadable="true"/&gt;
+				</pre>
+				<%} %>
 
 				<p>&nbsp;</p>
 
