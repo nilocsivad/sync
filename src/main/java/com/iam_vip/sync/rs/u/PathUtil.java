@@ -29,20 +29,7 @@ public class PathUtil {
 
 	public static String getPath(HttpServletRequest request, String path) throws Exception {
 
-		if (invocable == null) {
-
-			String realPath = request.getServletContext().getRealPath("encodeURIComponent.js");
-			System.out.println(realPath);
-
-			try {
-				ScriptEngineManager m = new ScriptEngineManager();
-				ScriptEngine e = m.getEngineByName("JavaScript");
-				e.eval(new FileReader(realPath));
-				invocable = (Invocable) e;
-			} catch (FileNotFoundException | ScriptException e) {
-				e.printStackTrace();
-			}
-		}
+		
 
 		if (System.getProperty("os.name").contains("Windows")) {
 
@@ -69,7 +56,7 @@ public class PathUtil {
 			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
 			String prefix = "/" + root + root + root;
 
-			String to = http + prefix.toLowerCase() + invocable.invokeFunction("enc", folder).toString().replace("%2F", "/");
+			String to = http + prefix.toLowerCase() + getInvocable(request).invokeFunction("enc", folder).toString().replace("%2F", "/");
 
 			return to;
 
@@ -95,12 +82,31 @@ public class PathUtil {
 				}
 			}
 
-			String to = http + prefix + invocable.invokeFunction("enc", path).toString().replace("%2F", "/");
+			String to = http + prefix + getInvocable(request).invokeFunction("enc", path).toString().replace("%2F", "/");
 
 			return to;
 
 		}
 
+	}
+	
+	public static Invocable getInvocable(HttpServletRequest request) {
+		
+		if (invocable == null) {
+
+			String realPath = request.getServletContext().getRealPath("encodeURIComponent.js");
+			System.out.println(realPath);
+
+			try {
+				ScriptEngineManager m = new ScriptEngineManager();
+				ScriptEngine e = m.getEngineByName("JavaScript");
+				e.eval(new FileReader(realPath));
+				invocable = (Invocable) e;
+			} catch (FileNotFoundException | ScriptException e) {
+				e.printStackTrace();
+			}
+		}
+		return invocable;
 	}
 
 }

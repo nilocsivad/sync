@@ -8,7 +8,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iam_vip.sync.action.ActionBase;
+import com.iam_vip.sync.rs.u.PathUtil;
 
 /**
  * @author Colin
@@ -81,7 +81,8 @@ public class FileSyncAction extends ActionBase {
 
 		response.reset();
 		response.setContentType("application/x-download");
-		response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+		//response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file.getName(), "UTF-8"));
+		response.addHeader("Content-Disposition", "attachment;filename=" + PathUtil.getInvocable(request).invokeFunction("enc", file.getName()).toString());
 		response.addHeader("Content-Length", file.length() + "");
 
 		BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
