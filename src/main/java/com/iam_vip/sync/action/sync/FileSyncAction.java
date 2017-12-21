@@ -7,10 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +23,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iam_vip.sync.action.ActionBase;
-import com.iam_vip.sync.rs.u.ConfigUtil;
 
 /**
  * @author Colin
@@ -46,8 +42,7 @@ public class FileSyncAction extends ActionBase {
 
 		if (farr != null && farr.length > 0 /* !f.isEmpty() */) {
 
-			String folder = ConfigUtil.getFolder();
-			File ff = new File(folder);
+			File ff = new File("/tmp");
 			if (!ff.exists())
 				ff.mkdirs();
 
@@ -58,7 +53,7 @@ public class FileSyncAction extends ActionBase {
 
 				BufferedInputStream input = new BufferedInputStream(f.getInputStream());
 
-				File newFile = new File(folder, f.getOriginalFilename());
+				File newFile = new File(ff, f.getOriginalFilename());
 				System.out.println("==> " + newFile.getAbsolutePath());
 
 				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(newFile));
@@ -81,51 +76,6 @@ public class FileSyncAction extends ActionBase {
 
 	@RequestMapping(value = { "download.html" })
 	public void download(String path, @RequestParam(defaultValue = "0") Integer f, HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
-
-		String osName = System.getProperty("os.name");
-
-		if (osName.contains("Windows") && f == 0) {
-
-			int idx = path.indexOf(":");
-			if (idx == 1) {
-
-				String root = path.substring(0, 1);
-				String folder = path.substring(2).replace("\\", "/");
-
-				int port = request.getServerPort();
-				String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
-				String prefix = "/" + root + root + root;
-
-				String to = http + prefix.toLowerCase() + URLEncoder.encode(folder, "UTF-8").replace("%2F", "/");
-				System.out.println(to);
-
-				response.sendRedirect(to);
-
-			}
-			else {
-				downloadNext(path, response);
-			}
-
-		}
-		else if ((osName.contains("Mac") || osName.contains("Linux")) && f == 0) {
-
-			int port = request.getServerPort();
-			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
-			String prefix = ConfigUtil.getLinuxMacResource();
-
-			String to = http + prefix + URLEncoder.encode(path, "UTF-8").replace("%2F", "/");
-			System.out.println(to);
-
-			response.sendRedirect(to);
-
-		}
-		else {
-			downloadNext(path, response);
-		}
-
-	}
-
-	private void downloadNext(String path, HttpServletResponse response) throws IOException, UnsupportedEncodingException, FileNotFoundException {
 
 		File file = new File(path);
 
