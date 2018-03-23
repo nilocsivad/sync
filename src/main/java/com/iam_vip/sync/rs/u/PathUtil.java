@@ -71,7 +71,7 @@ public class PathUtil {
 				String sRealPath = request.getSession().getServletContext().getRealPath("/");
 				File fPath1 = new File(sRealPath);
 				
-				File fRootXml = new File(fPath1.getParentFile().getParentFile(), "conf\\Catalina\\localhost\\" + prefix + ".xml");
+				File fRootXml = new File(fPath1.getParentFile().getParentFile(), "conf/Catalina/localhost/" + prefix + ".xml");
 				
 				if (fRootXml.exists() == false) {
 					fRootXml.createNewFile();

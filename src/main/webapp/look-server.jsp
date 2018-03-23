@@ -90,6 +90,8 @@
 			<div class="container">
 				<%
 					for (File file : fs) {
+						
+						if (file == null) continue;
 				%>
 				<p class="link-p" style="margin: 10px 0">
 					<%
