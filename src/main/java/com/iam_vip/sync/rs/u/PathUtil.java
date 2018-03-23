@@ -64,7 +64,7 @@ public class PathUtil {
 
 			int port = request.getServerPort();
 			String http = request.getScheme() + "://" + request.getServerName() + (port == 80 ? "" : ":" + port);
-			String prefix = "sync-rs";
+			String prefix = "/sync-rs";
 			
 			{ /// 动态创建 Tomcat 目录映射 ///
 				
